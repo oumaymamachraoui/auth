@@ -5,21 +5,21 @@ const jwt = require('jsonwebtoken')
 // login user
 
 exports.login = async (req, res) => {
-    const { email, password } = req.body;
   try {
-    const existUser = await User.findOne({ email });
-    if (!existUser) {
-      res.status(400).send({ msg: "bad credential" });
+    const { email, password } = req.body;
+    const foundUser = await User.findOne({ email });
+    if (!foundUser) {
+      return res.status(400).send({ msg: "bad credential" });
     }
-    const checkpass = await bcrypt.compare(password, existUser.password);
+    const checkpass = await bcrypt.compare(password, foundUser.password);
     if (!checkpass) {
-      res.status(400).send({ msg: "bad credential" });
+      return res.status(400).send({ msg: "bad credential" });
     }
     const token = jwt.sign({
-      id: existUser._id
+      id: foundUser._id
     },
     process.env.SECRET_KEY);
-    res.status(200).send( {msg :"login successfully",existUser, token})
+    return res.status(200).send( {msg :"login successfully",user: foundUser, token})
   } catch (error) {
     res.status(400).send({ msg: "cannot login " });
   }

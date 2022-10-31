@@ -8,9 +8,9 @@ import {
 } from "../actionsType/actionTypes";
 
 const initialState = {
-  user: null,
+  user: {},
   loadUser: false,
-  errors: null,
+  errors: [],
   isAuth: false,
 };
 const userReducer = (state = initialState, { type, payload }) => {
@@ -18,18 +18,18 @@ const userReducer = (state = initialState, { type, payload }) => {
     case LOAD_USER:
       return { ...state, loadUser: true };
     case REGISTER_USER:
-      localStorage.setItem("token");
+      localStorage.setItem("token", payload.token);
       return { ...state, loadUser: false, user: payload.user, isAuth: true };
     case LOGIN_USER:
-      localStorage.setItem("token");
+      localStorage.setItem("token", payload.token);
       return { ...state, loadUser: false, user: payload.user, isAuth: true };
     case CURRENT_USER:
-      return { ...state, loadUser: false, user: payload };
+      return { ...state, loadUser: false, user: payload , isAuth: true };
     case LOGOUT:
       localStorage.removeItem("token");
-      return { loadUser: false, isAuth: false, user: null, errors: [] };
+      return { loadUser: false, isAuth: false, user: {}, errors: [] };
     case FAIL_USER:
-      return { ...state, errors: payload };
+      return { ...state, errors: payload , loadUser: false};
     default:
       return state;
   }

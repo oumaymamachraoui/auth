@@ -11,8 +11,7 @@ const Login = () => {
   const handleChange =(e)=>{
     setUser({...user, [e.target.name]: e.target.value})
   }
-  const handleUser =(e)=>{
-    e.preventDefault();
+  const handleUser =()=>{
     dispatch(login(user))
     navigate('/home')
   }

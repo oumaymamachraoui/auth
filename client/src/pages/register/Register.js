@@ -22,8 +22,22 @@ const Register = () => {
     <div>
       <Form>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Name </Form.Label>
-          <Form.Control type="text" placeholder="Enter name" name="name" onChange={handleChange}/>
+          <Form.Label>Nom </Form.Label>
+          <Form.Control type="text" placeholder="nom" name="nom" onChange={handleChange}/>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Prenom </Form.Label>
+          <Form.Control type="text" placeholder="prenom" name="prenom" onChange={handleChange}/>
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Adresse </Form.Label>
+          <Form.Control type="text" placeholder="adresse" name="adresse" onChange={handleChange}/>
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Age </Form.Label>
+          <Form.Control type="date" placeholder="age" name="age" onChange={handleChange}/>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicEmail" >

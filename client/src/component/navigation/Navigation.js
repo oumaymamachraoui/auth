@@ -17,7 +17,7 @@ const Navigation = () => {
           </Nav>
 
           {isAuth ? (
-            <Link to="/login">
+            <Link to="/">
               <Button onClick={() => dispatch(logout())}> Logout </Button>{" "}
             </Link>
           ) : (

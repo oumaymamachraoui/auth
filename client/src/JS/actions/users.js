@@ -17,23 +17,24 @@ export const register = (newUser) => async (dispatch) => {
     dispatch({ type: FAIL_USER, payload: error });
   }
 };
+
 export const login = (user) => async (dispatch) => {
   dispatch({ type: LOAD_USER });
   try {
     let result = await axios.post("/api/user/login", user);
-    dispatch({ type: LOGIN_USER, payload: result.data });
+    return dispatch({ type: LOGIN_USER, payload: result.data });
   } catch (error) {
     dispatch({ type: FAIL_USER, payload: error });
   }
 };
 
-export const current = () => async (dispatch) => {
+export const current = () => async(dispatch) => {
   dispatch({ type: LOAD_USER });
   try {
-    let config = {
+    const config = {
       headers: localStorage.getItem("token"),
     };
-    let result = await axios.get("/api/user/current", config);
+    const result = await axios.get("/api/user/current" , config);
     dispatch({ type: CURRENT_USER, payload: result.data });
   } catch (error) {
     dispatch({ type: FAIL_USER, payload: error });

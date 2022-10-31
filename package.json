@@ -12,7 +12,7 @@
     "nodemon": "^2.0.19"
   },
   "scripts": {
-    "front": "cd client && npm start", 
+    "front": "cd client && npm start",
     "back": "nodemon server.js",
     "start": "concurrently \"npm run front\" \"npm run back\""
   },

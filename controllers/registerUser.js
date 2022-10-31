@@ -6,23 +6,23 @@ const jwt = require("jsonwebtoken");
 
 exports.register = async (req, res) => {
   try {
-    const { name, email, password, phone } = req.body;
+    const { nom, prenom, adresse, age, email, password, phone } = req.body;
     const foundUser = await User.findOne({ email });
     if (foundUser) {
-      res.status(400).send({ msg: "email already used" });
+      return res.status(400).send({ msg: "email already used" });
     }
-
     const salt = 10;
     const hashedpass = await bcrypt.hash(password, salt);
-    newUser = new User({ ...req.body });
+    const newUser = new User({ ...req.body });
     newUser.password = hashedpass;
     await newUser.save();
     const token = jwt.sign({
       id: newUser._id
     },
     process.env.SECRET_KEY);
-    res.status(200).send({ msg: "registred successfully", newUser , token});
+    return res.status(200).send({ msg: "registred successfully", user: newUser , token});
   } catch (error) {
-    res.status(400).send({ errors: [{ msg: "cannot register" }] });
+    return res.status(400).send({ errors: [{ msg: "cannot register" }] });
   }
 };
+
